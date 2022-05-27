@@ -1,11 +1,6 @@
-<template>
-  <div class="container">
-    <Register/>
-  </div>
-</template>
-
 <script setup>
 import Register from './components/RegisterComponent.vue'
+import Check from './components/ViewBalanceComponent.vue'
 
 import {useAccountStore} from "./stores/account";
 import {onMounted} from "vue";
@@ -20,6 +15,13 @@ onMounted(() => {
   }
 });
 </script>
+
+<template>
+  <div class="container">
+    <Register/>
+    <Check/>
+  </div>
+</template>
 
 <style>
 #app {

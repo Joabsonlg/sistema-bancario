@@ -1,5 +1,5 @@
 import {defineStore} from "pinia";
-import {createAccount, getAccounts} from "../api";
+import {createAccount, getAccounts, getBalance} from "../api";
 
 export const useAccountStore = defineStore('account', {
     state: () => ({
@@ -21,6 +21,9 @@ export const useAccountStore = defineStore('account', {
         },
         loadAccounts() {
             this.accounts = getAccounts()
+        },
+        getBalance(numberAccount) {
+            return getBalance(numberAccount)
         }
     }
 })

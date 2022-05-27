@@ -6,3 +6,10 @@ export const createAccount = (account) => {
 }
 
 export const getAccounts = () => getFromLocalStorage('accounts') || [];
+
+export const getBalance = (numberAccount) => {
+    const accounts = getAccounts();
+    const account = accounts.find(account => account.number === numberAccount);
+    if (!account) throw new Error('Conta não encontrada!');
+    return account.balance;
+}
