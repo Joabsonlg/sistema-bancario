@@ -1,6 +1,7 @@
 <script setup>
 import Register from './components/RegisterComponent.vue'
 import Check from './components/ViewBalanceComponent.vue'
+import Credit from './components/CreditComponent.vue'
 
 import {useAccountStore} from "./stores/account";
 import {onMounted} from "vue";
@@ -20,6 +21,7 @@ onMounted(() => {
   <div class="container">
     <Register/>
     <Check/>
+    <Credit/>
   </div>
 </template>
 
