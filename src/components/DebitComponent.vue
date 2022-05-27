@@ -1,7 +1,7 @@
 <template>
   <div class="row mt-5">
     <div class="col-12">
-      <h2>Crédito</h2>
+      <h2>Débito</h2>
     </div>
     <div class="col-6">
       <div class="input-group input-group-sm mb-3">
@@ -19,7 +19,7 @@
     </div>
   </div>
 
-  <button type="button" @click="creditAccount" :disabled="!accountNumber || !value">Creditar</button>
+  <button type="button" @click="debitAccount" :disabled="!accountNumber || !value">Debitar</button>
 </template>
 
 <script setup>
@@ -31,12 +31,12 @@ const accountStore = useAccountStore();
 const accountNumber = ref('')
 const value = ref('')
 
-const creditAccount = () => {
+const debitAccount = () => {
   try {
-    accountStore.creditAccount(accountNumber.value, value.value)
+    accountStore.debitAccount(accountNumber.value, value.value)
     accountNumber.value = ''
     value.value = ''
-    alert('Conta creditada com sucesso!')
+    alert('Conta debitada com sucesso!')
   } catch (e) {
     alert(e.message)
   }

@@ -22,3 +22,12 @@ export const creditAccount = (numberAccount, value) => {
     account.balance += value;
     saveToLocalStorage('accounts', accounts);
 }
+
+export const debitAccount = (numberAccount, value) => {
+    if ((value*(-1)) > 0) throw new Error('Valor inválido!');
+    const accounts = getAccounts();
+    const account = accounts.find(account => account.number === numberAccount);
+    if (!account) throw new Error('Conta não encontrada!');
+    account.balance -= value;
+    saveToLocalStorage('accounts', accounts);
+}

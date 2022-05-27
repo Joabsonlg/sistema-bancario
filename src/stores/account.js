@@ -1,5 +1,5 @@
 import {defineStore} from "pinia";
-import {createAccount, getAccounts, getBalance, creditAccount} from "../api";
+import {createAccount, getAccounts, getBalance, creditAccount, debitAccount} from "../api";
 
 export const useAccountStore = defineStore('account', {
     state: () => ({
@@ -27,6 +27,10 @@ export const useAccountStore = defineStore('account', {
         },
         creditAccount(numberAccount, value) {
             creditAccount(numberAccount, value)
+            this.loadAccounts()
+        },
+        debitAccount(numberAccount, value) {
+            debitAccount(numberAccount, value)
             this.loadAccounts()
         }
     }
