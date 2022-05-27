@@ -31,3 +31,16 @@ export const debitAccount = (numberAccount, value) => {
     account.balance -= value;
     saveToLocalStorage('accounts', accounts);
 }
+
+export const transfer = (numberAccountFrom, numberAccountTo, value) => {
+    if (value < 0) throw new Error('Valor inválido!');
+    const accounts = getAccounts();
+    const accountFrom = accounts.find(account => account.number === numberAccountFrom);
+    const accountTo = accounts.find(account => account.number === numberAccountTo);
+    if (!accountFrom) throw new Error('Conta de origem não encontrada!');
+    if (!accountTo) throw new Error('Conta de destino não encontrada!');
+    if (accountFrom.balance < value) throw new Error('Saldo insuficiente!');
+    accountFrom.balance -= value;
+    accountTo.balance += value;
+    saveToLocalStorage('accounts', accounts);
+}
