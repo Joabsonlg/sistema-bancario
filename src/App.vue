@@ -1,11 +1,25 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + Vite" />
+  <div class="container">
+    <Register/>
+  </div>
 </template>
+
+<script setup>
+import Register from './components/RegisterComponent.vue'
+
+import {useAccountStore} from "./stores/account";
+import {onMounted} from "vue";
+
+const accountStore = useAccountStore();
+
+onMounted(() => {
+  try {
+    accountStore.loadAccounts();
+  } catch (e) {
+    alert(e.message)
+  }
+});
+</script>
 
 <style>
 #app {
