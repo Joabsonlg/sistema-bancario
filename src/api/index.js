@@ -18,16 +18,17 @@ export const creditAccount = (numberAccount, value) => {
     if (value < 0) throw new Error('Valor inválido!');
     const accounts = getAccounts();
     const account = accounts.find(account => account.number === numberAccount);
-    if (!account) throw new Error('Conta não encontrada!');
+    if (!account) throw new Error(`Conta ${numberAccount} não encontrada!`);
     account.balance += value;
     saveToLocalStorage('accounts', accounts);
 }
 
 export const debitAccount = (numberAccount, value) => {
-    if ((value*(-1)) > 0) throw new Error('Valor inválido!');
+    if ((value * (-1)) > 0) throw new Error('Valor inválido!');
     const accounts = getAccounts();
     const account = accounts.find(account => account.number === numberAccount);
-    if (!account) throw new Error('Conta não encontrada!');
+    if (!account) throw new Error(`Conta ${numberAccount} não encontrada!`);
+    if (account.balance < value) throw new Error('Saldo insuficiente!');
     account.balance -= value;
     saveToLocalStorage('accounts', accounts);
 }
