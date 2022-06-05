@@ -19,6 +19,7 @@ export const creditAccount = (numberAccount, value) => {
     const accounts = getAccounts();
     const account = accounts.find(account => account.number === numberAccount);
     if (!account) throw new Error(`Conta ${numberAccount} não encontrada!`);
+    if (account.type === 'bonnus') account.score += Math.floor(value / 100);
     account.balance += value;
     saveToLocalStorage('accounts', accounts);
 }
@@ -43,5 +44,6 @@ export const transfer = (numberAccountFrom, numberAccountTo, value) => {
     if (accountFrom.balance < value) throw new Error('Saldo insuficiente!');
     accountFrom.balance -= value;
     accountTo.balance += value;
+    if (accountTo.type === 'bonnus') accountTo.score += Math.floor(value / 200);
     saveToLocalStorage('accounts', accounts);
 }
