@@ -1,14 +1,14 @@
 import {defineStore} from "pinia";
-import {createAccount, getAccounts, getBalance, creditAccount, debitAccount, transfer} from "../api";
+import {createAccount, getAccounts, getBalance, creditAccount, debitAccount, transfer, yieldInterest} from "../api";
 
 const accountFactory = (numberAccount, accountType) => {
-    if (accountType === "common") {
+    if (accountType === 'common' || accountType === 'savings') {
         return {
             number: numberAccount,
             type: accountType,
             balance: 0
         }
-    } else if (accountType === "bonnus") {
+    } else if (accountType === 'bonnus') {
         return {
             number: numberAccount,
             type: accountType,
@@ -49,6 +49,10 @@ export const useAccountStore = defineStore('account', {
         },
         transfer(numberAccountFrom, numberAccountTo, value) {
             transfer(numberAccountFrom, numberAccountTo, value)
+            this.loadAccounts()
+        },
+        yieldInterest(rate) {
+            yieldInterest(rate)
             this.loadAccounts()
         }
     }

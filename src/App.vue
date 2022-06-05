@@ -4,6 +4,7 @@ import Check from './components/ViewBalanceComponent.vue'
 import Credit from './components/CreditComponent.vue'
 import Debit from './components/DebitComponent.vue'
 import Transfer from './components/TransferComponent.vue'
+import YieldInterest from './components/YieldInterest.vue'
 
 import {useAccountStore} from "./stores/account";
 import {onMounted} from "vue";
@@ -26,6 +27,7 @@ onMounted(() => {
     <Credit/>
     <Debit/>
     <Transfer/>
+    <YieldInterest/>
   </div>
 </template>
 

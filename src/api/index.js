@@ -47,3 +47,12 @@ export const transfer = (numberAccountFrom, numberAccountTo, value) => {
     if (accountTo.type === 'bonnus') accountTo.score += Math.floor(value / 200);
     saveToLocalStorage('accounts', accounts);
 }
+
+export const yieldInterest = (rate) => {
+    if (rate < 0) throw new Error('Taxa inválida!');
+    const accounts = getAccounts();
+    accounts.filter(account => account.type === 'savings').forEach(account => {
+        account.balance += (account.balance * (rate/100));
+    });
+    saveToLocalStorage('accounts', accounts);
+}

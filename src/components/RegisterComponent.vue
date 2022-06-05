@@ -16,6 +16,7 @@
         <select class="form-control" v-model="accountType">
           <option value="common">Conta Comum</option>
           <option value="bonnus">Conta Bônus</option>
+          <option value="savings">Conta Poupança</option>
         </select>
       </div>
     </div>
