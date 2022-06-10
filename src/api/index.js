@@ -33,6 +33,7 @@ export const debitAccount = (numberAccount, value) => {
     saveToLocalStorage('accounts', accounts);
 }
 
+// Só aceita valores positivos
 export const transfer = (numberAccountFrom, numberAccountTo, value) => {
     if (value < 0) throw new Error('Valor inválido!');
     const accounts = getAccounts();
