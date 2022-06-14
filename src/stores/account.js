@@ -1,12 +1,18 @@
 import {defineStore} from "pinia";
 import {createAccount, getAccounts, getBalance, creditAccount, debitAccount, transfer, yieldInterest} from "../api";
 
-const accountFactory = (numberAccount, accountType) => {
-    if (accountType === 'common' || accountType === 'savings') {
+const accountFactory = (numberAccount, accountType, initialBalance) => {
+    if (accountType === 'common') {
         return {
             number: numberAccount,
             type: accountType,
             balance: 0
+        }
+    } else if (accountType === 'savings') {
+        return {
+            number: numberAccount,
+            type: accountType,
+            balance: initialBalance
         }
     } else if (accountType === 'bonnus') {
         return {
@@ -26,10 +32,11 @@ export const useAccountStore = defineStore('account', {
         getAccounts: state => state.accounts
     },
     actions: {
-        createAccount(numberAccount, accountType) {
+        createAccount(numberAccount, accountType, initialBalance) {
             if (this.getAccounts.find(account => account.number === numberAccount))
                 throw new Error('Número de conta já existe!')
-            const account = accountFactory(numberAccount, accountType)
+            if (initialBalance && initialBalance < 0) throw new Error('Saldo inicial inválido!')
+            const account = accountFactory(numberAccount, accountType, initialBalance)
             createAccount(account)
             this.accounts.push(account)
         },
