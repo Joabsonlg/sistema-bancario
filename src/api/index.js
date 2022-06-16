@@ -45,7 +45,7 @@ export const transfer = (numberAccountFrom, numberAccountTo, value) => {
     if (accountFrom.balance < value) throw new Error('Saldo insuficiente!');
     accountFrom.balance -= value;
     accountTo.balance += value;
-    if (accountTo.type === 'bonnus') accountTo.score += Math.floor(value / 200);
+    if (accountTo.type === 'bonnus') accountTo.score += Math.floor(value / 150);
     saveToLocalStorage('accounts', accounts);
 }
 
