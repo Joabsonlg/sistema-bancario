@@ -6,7 +6,7 @@ const accountFactory = (numberAccount, accountType, initialBalance) => {
         return {
             number: numberAccount,
             type: accountType,
-            balance: 0
+            balance: initialBalance
         }
     } else if (accountType === 'savings') {
         return {
