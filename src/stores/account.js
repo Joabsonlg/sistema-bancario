@@ -9,12 +9,13 @@ export const useAccountStore = defineStore('account', {
         getAccounts: state => state.accounts
     },
     actions: {
-        createAccount(numberAccount) {
+        createAccount(numberAccount, initialBalance) {
             if (this.getAccounts.find(account => account.number === numberAccount))
                 throw new Error('Número de conta já existe!')
+            if (initialBalance && initialBalance < 0) throw new Error('Saldo inicial inválido!')
             const account = {
                 number: numberAccount,
-                balance: 0
+                balance: initialBalance || 0
             }
             createAccount(account)
             this.accounts.push(account)
