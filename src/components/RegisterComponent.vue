@@ -20,6 +20,13 @@
         </select>
       </div>
     </div>
+    <div class="col-6" v-if="accountType === 'common'">
+      <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Saldo inicial</span>
+        <input type="number" class="form-control" aria-label="Sizing example input"
+               aria-describedby="inputGroup-sizing-sm" v-model="initialBalance">
+      </div>
+    </div>
   </div>
 
   <button type="button" @click="saveAccount" :disabled="!accountNumber">Salvar</button>
@@ -33,11 +40,13 @@ const accountStore = useAccountStore();
 
 const accountNumber = ref('')
 const accountType = ref('common')
+const initialBalance = ref(undefined )
 
 const saveAccount = () => {
   try {
-    accountStore.createAccount(accountNumber.value, accountType.value)
+    accountStore.createAccount(accountNumber.value, accountType.value, initialBalance.value)
     accountNumber.value = ''
+    initialBalance.value = undefined
     alert('Conta salva com sucesso!')
   } catch (e) {
     alert(e.message)
