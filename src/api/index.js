@@ -1,11 +1,40 @@
-import {saveToLocalStorage, getFromLocalStorage} from "../support/storage";
+import {getFromLocalStorage, saveToLocalStorage} from "../support/storage";
 
-export const createAccount = (account) => {
-    const accounts = getFromLocalStorage('accounts') || [];
-    saveToLocalStorage('accounts', accounts.concat(account));
+const accountFactory = (numberAccount, accountType, initialBalance) => {
+    if (accountType === 'common') {
+        return {
+            number: numberAccount,
+            type: accountType,
+            balance: initialBalance
+        }
+    } else if (accountType === 'savings') {
+        return {
+            number: numberAccount,
+            type: accountType,
+            balance: initialBalance
+        }
+    } else if (accountType === 'bonnus') {
+        return {
+            number: numberAccount,
+            type: accountType,
+            score: 10,
+            balance: 0
+        }
+    }
 }
 
 export const getAccounts = () => getFromLocalStorage('accounts') || [];
+
+export const createAccount = (numberAccount, accountType, initialBalance) => {
+    if (getAccounts().find(account => account.number === numberAccount))
+        throw new Error('Número de conta já existe!')
+    if (initialBalance && initialBalance < 0) throw new Error('Saldo inicial inválido!')
+    const account = accountFactory(numberAccount, accountType, initialBalance)
+
+    const accounts = getFromLocalStorage('accounts') || [];
+    saveToLocalStorage('accounts', accounts.concat(account));
+    return account;
+}
 
 export const getBalance = (numberAccount) => {
     const accounts = getAccounts();
@@ -52,7 +81,7 @@ export const yieldInterest = (rate) => {
     if (rate < 0) throw new Error('Taxa inválida!');
     const accounts = getAccounts();
     accounts.filter(account => account.type === 'savings').forEach(account => {
-        account.balance += (account.balance * (rate/100));
+        account.balance += (account.balance * (rate / 100));
     });
     saveToLocalStorage('accounts', accounts);
 }
