@@ -20,7 +20,7 @@
         </select>
       </div>
     </div>
-    <div class="col-6" v-if="accountType === 'savings'">
+    <div class="col-6" v-if="accountType === 'savings' || accountType === 'common'">
       <div class="input-group input-group-sm mb-3">
         <span class="input-group-text" id="inputGroup-sizing-sm">Saldo inicial</span>
         <input type="number" class="form-control" aria-label="Sizing example input"
