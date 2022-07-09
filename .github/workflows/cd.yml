@@ -18,6 +18,9 @@ jobs:
       - name: Build project
         run: npm run build
 
+      - name: Format code
+        run: npm run format
+
       - name: Run Lint
         run: npm run lint
 
