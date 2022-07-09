@@ -18,11 +18,14 @@ jobs:
       - name: Build project
         run: npm run build
 
+      - name: Run Lint
+        run: npm run lint
+
       - name: Test project
         run: npm run test
 
       - name: Upload build files
         uses: actions/upload-artifact@v2
         with:
-          name: production-files
+          name: baseline-files
           path: ./dist
